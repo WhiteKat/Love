@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Для Надежды ❤️</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #fdf6f0;
+    --pink: #e8a0b8;
+    --rose: #c96b8a;
+    --gold: #c9a86a;
+    --dark: #4a2c3a;
+    --text: #5a3a4a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.7;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='24' font-size='24'%3E%F0%9F%92%95%3C/text%3E%3C/svg%3E") 16 16, auto;
+  }
+
+  a, button {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='24' font-size='24'%3E%F0%9F%92%96%3C/text%3E%3C/svg%3E") 16 16, pointer;
+  }
+
+  /* ===== ФОН С ЛЕПЕСТКАМИ ===== */
+  .petals {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .petal {
+    position: absolute;
+    top: -50px;
+    font-size: 20px;
+    animation: fall linear infinite;
+    opacity: 0.7;
+  }
+  @keyframes fall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* ===== ЭКРАН 1: ПРИВЕТСТВИЕ ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 2;
+    background: radial-gradient(ellipse at center, #fff5f0 0%, #fdf6f0 70%);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Marck Script', cursive;
+    font-size: clamp(4rem, 15vw, 9rem);
+    color: var(--rose);
+    line-height: 1;
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.6s forwards;
+    text-shadow: 0 4px 20px rgba(201, 107, 138, 0.2);
+  }
+
+  .hero-photo {
+    width: min(320px, 80vw);
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 200px 200px 20px 20px;
+    border: 6px solid #fff;
+    box-shadow: 0 20px 50px rgba(201, 107, 138, 0.25);
+    margin: 30px 0;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.9s forwards;
+  }
+
+  .hero-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--text);
+    max-width: 500px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 1.2s 1.2s forwards;
+  }
+
+  .btn-open {
+    display: inline-block;
+    padding: 18px 45px;
+    background: linear-gradient(135deg, var(--pink), var(--rose));
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(201, 107, 138, 0.35);
+    transition: all 0.4s;
+    opacity: 0;
+    animation: fadeUp 1.2s 1.5s forwards;
+  }
+  .btn-open:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(201, 107, 138, 0.5);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== ЭКРАН 2: ПИСЬМО ===== */
+  .letter {
+    padding: 100px 20px;
+    max-width: 750px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .letter-block {
+    margin-bottom: 70px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease;
+  }
+  .letter-block.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .letter-block p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+    line-height: 1.9;
+    color: var(--text);
+    text-align: center;
+  }
+
+  .letter-block .emoji {
+    display: block;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .letter-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 auto 30px;
+    opacity: 0.5;
+  }
+
+  /* ===== ЭКРАН 3: СЧЁТЧИК ===== */
+  .counter-section {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #fff0f5, #fdf6f0);
+    position: relative;
+    z-index: 2;
+  }
+
+  .counter-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 30px;
+  }
+
+  .counter-big {
+    font-family: 'Marck Script', cursive;
+    font-size: clamp(5rem, 18vw, 10rem);
+    color: var(--rose);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .counter-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 40px;
+  }
+
+  .counter-detail {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .counter-item { text-align: center; }
+  .counter-item .num {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--rose);
+  }
+  .counter-item .lbl {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ===== ЭКРАН 4: ГАЛЕРЕЯ ===== */
+  .gallery-section {
+    padding: 80px 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .gallery-title {
+    text-align: center;
+    font-family: 'Marck Script', cursive;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    color: var(--rose);
+    margin-bottom: 60px;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .polaroid {
+    background: #fff;
+    padding: 14px 14px 14px;
+    border-radius: 4px;
+    box-shadow: 0 8px 25px rgba(74, 44, 58, 0.15);
+    transform: rotate(var(--rot, 0deg));
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .polaroid.visible { opacity: 1; }
+  .polaroid:hover {
+    transform: rotate(0deg) scale(1.05) translateY(-8px);
+    box-shadow: 0 20px 45px rgba(201, 107, 138, 0.3);
+    z-index: 10;
+  }
+
+  .polaroid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    background: #f5e5ea;
+    border-radius: 2px;
+  }
+
+  .polaroid .caption {
+    text-align: center;
+    font-family: 'Marck Script', cursive;
+    font-size: 1.15rem;
+    color: var(--text);
+    padding: 12px 6px 4px;
+    line-height: 1.3;
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ===== ФИНАЛ ===== */
+  .final {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px;
+    position: relative;
+    z-index: 2;
+    background: radial-gradient(ellipse at center, #fff0f5 0%, #fdf6f0 80%);
+  }
+
+  .final-heart {
+    font-size: 4rem;
+    margin-bottom: 30px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  .final-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-style: italic;
+    color: var(--text);
+    max-width: 600px;
+    margin-bottom: 30px;
+  }
+
+  .final-sign {
+    font-family: 'Marck Script', cursive;
+    font-size: 2rem;
+    color: var(--rose);
+  }
+
+  .final-infinity {
+    font-size: 3rem;
+    color: var(--gold);
+    margin-top: 20px;
+  }
+
+  /* ===== АДАПТИВ ===== */
+  @media (max-width: 600px) {
+    .letter { padding: 60px 20px; }
+    .letter-block { margin-bottom: 50px; }
+    .gallery { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .polaroid { padding: 8px 8px 8px; }
+    .polaroid .caption { font-size: 0.9rem; padding: 8px 4px 2px; min-height: 45px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ЛЕПЕСТКИ НА ФОНЕ -->
+<div class="petals" id="petals"></div>
+
+<!-- ЭКРАН 1: ПРИВЕТСТВИЕ -->
+<section class="hero">
+  <div class="hero-sub">Для тебя, моя любимая</div>
+  <h1 class="hero-name">Надежда</h1>
+  <img src="main.jpg" alt="Мы" class="hero-photo" onerror="this.style.display='none'">
+  <p class="hero-text">Здесь — история наших дней. Каждый момент, каждое фото, каждое слово — для тебя.</p>
+  <a href="#letter" class="btn-open">Открыть письмо 💌</a>
+</section>
+
+<!-- ЭКРАН 2: ПИСЬМО -->
+<section class="letter" id="letter">
+
+  <div class="letter-block">
+    <span class="emoji">🌷</span>
+    <p>Моя самая любимая и дорогая девочка!</p>
+  </div>
+
+  <div class="letter-block">
+    <div class="letter-divider"></div>
+    <p>Сегодня особенный день, пусть он и не отмечен в официальном календаре. Ровно 1 год, 4 месяца и 11 дней назад моя жизнь полностью изменилась, потому что в ней появилась ты. А завтра наступит наш первый большой рубеж — ровно 500 дней, как мы вместе. Пусть такую дату обычно и не празднуют громко, но для меня каждый день с тобой на счету, и я считаю, что этот красивый юбилей — наш общий повод для гордости. 🌟</p>
+  </div>
+
+  <div class="letter-block">
+    <div class="letter-divider"></div>
+    <p>Все это время я засыпаю и просыпаюсь с одной главной мыслью — как же мне повезло быть рядом с тобой. Я люблю тебя так сильно и глубоко, что порой мне просто не хватает слов, чтобы это описать. Ты — моё солнце, мой уют и моё самое главное вдохновение. ☀️</p>
+  </div>
+
+  <div class="letter-block">
+    <div class="letter-divider"></div>
+    <p>Когда я смотрю на нас сейчас, на пороге этих 500 дней, я понимаю, какой огромный путь мы совершили. Сколько труда, сил и времени ушло на то, чтобы мы наконец-то пришли к этому моменту и почувствовали, что такое настоящая, зрелая и искренняя любовь. Мы прошли через столько разных этапов — учились притираться, понимать друг друга, прощать и слышать. И то, что у нас есть сейчас, — это наша общая, бесценная победа. 🏔️</p>
+  </div>
+
+  <div class="letter-block">
+    <div class="letter-divider"></div>
+    <p>Но сегодня мне хочется не просто признаться тебе в любви, а попросить прощения. Мне искренне жаль, что на этом пути я так редко дарю тебе те самые красивые, милые и по-настоящему запоминающиеся моменты, которых ты так заслуживаешь. Ты достойна того, чтобы твои глаза каждый день светились от радости, чтобы вокруг тебя была романтика и сказка. Прости, что иногда я погружаюсь в рутину, бываю невнимательным или просто не умею правильно показать то, что у меня на душе. 😔</p>
+  </div>
+
+  <div class="letter-block">
+    <div class="letter-divider"></div>
+    <p>Я знаю, что я далеко не идеален. Во мне есть недостатки, и я совершаю ошибки. Но я хочу, чтобы ты знала: ради тебя, ради нашей любви и нашего будущего я готов работать над собой. Я готов меняться, исправлять все свои минусы и учиться быть лучшим мужчиной для тебя. Ты — тот человек, ради которого хочется расти и становиться сильнее каждый день. 🚀</p>
+  </div>
+
+  <div class="letter-block">
+    <div class="letter-divider"></div>
+    <p>Пожалуйста, помни: что бы ни случилось в этом огромном мире, какие бы штормы и трудности ни вставали на нашем пути, я никогда тебя не отпущу. Мы уже доказали за эти полтысячи дней, что умеем справляться со всеми этапами вместе, и дальше я пойду только с тобой. Я буду любить тебя, оберегать и ценить до самого конца, несмотря ни на что. Ты — моя единственная, на всю жизнь. ♾️</p>
+  </div>
+
+</section>
+
+<!-- ЭКРАН 3: СЧЁТЧИК -->
+<section class="counter-section">
+  <div class="counter-title">Мы вместе уже</div>
+  <div class="counter-big" id="daysCount">0</div>
+  <div class="counter-label">дней</div>
+  <div class="counter-detail">
+    <div class="counter-item">
+      <span class="num" id="hoursCount">0</span>
+      <span class="lbl">часов</span>
+    </div>
+    <div class="counter-item">
+      <span class="num" id="minutesCount">0</span>
+      <span class="lbl">минут</span>
+    </div>
+    <div class="counter-item">
+      <span class="num" id="secondsCount">0</span>
+      <span class="lbl">секунд</span>
+    </div>
+  </div>
+</section>
+
+<!-- ЭКРАН 4: ГАЛЕРЕЯ -->
+<section class="gallery-section">
+  <h2 class="gallery-title">Наши моменты</h2>
+  <div class="gallery" id="gallery"></div>
+</section>
+
+<!-- ФИНАЛ -->
+<section class="final">
+  <div class="final-heart">❤️</div>
+  <p class="final-text">Спасибо, что ты есть. Спасибо за эти 500 дней. И за все, что будет дальше.</p>
+  <div class="final-sign">Твой навсегда</div>
+  <div class="final-infinity">♾️</div>
+</section>
+
+<script>
+  /* ===== ЛЕПЕСТКИ ===== */
+  const petalEmojis = ['🌸', '💗', '🌷', '💕', '🌹', '💖'];
+  const petalsContainer = document.getElementById('petals');
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (8 + Math.random() * 10) + 's';
+    p.style.animationDelay = Math.random() * 15 + 's';
+    p.style.fontSize = (14 + Math.random() * 18) + 'px';
+    petalsContainer.appendChild(p);
+  }
+
+  /* ===== ГАЛЕРЕЯ ===== */
+  const photos = [
+    { src: '1.jpg',  cap: 'Наши маски для лица 😂' },
+    { src: '2.jpg',  cap: 'Твоя красота ✨' },
+    { src: '3.jpg',  cap: 'Зеркальные селфи 📸' },
+    { src: '4.jpg',  cap: 'Ты самая красивая на свете ❤️' },
+    { src: '6.jpg',  cap: 'Смотрим вдаль вместе 🌅' },
+    { src: '7.jpg',  cap: 'Любовь — это смеяться ❤️' },
+    { src: '8.jpg',  cap: 'Любовь — это ловить момент ❤️' },
+    { src: '9.jpg',  cap: 'Наше крутое фото ✨' },
+    { src: '10.jpg', cap: 'Зимний вечер ❄️' },
+    { src: '11.jpg', cap: 'Праздник и мы 🎉' },
+    { src: '13.jpg', cap: 'Дурачимся 🤪' },
+    { src: '14.jpg', cap: 'Шапочки нам очень классно идут 👒' },
+    { src: '15.jpg', cap: 'Слепили банду 🐙' },
+    { src: '16.jpg', cap: 'Смотрим в наше будущее ❤️' },
+    { src: '17.jpg', cap: 'Момент, который не хочется останавливать 🌙' },
+  ];
+
+  const gallery = document.getElementById('gallery');
+  photos.forEach((photo, i) => {
+    const div = document.createElement('div');
+    div.className = 'polaroid';
+    const rot = (Math.random() * 6 - 3).toFixed(1);
+    div.style.setProperty('--rot', rot + 'deg');
+    div.innerHTML = `
+      <img src="${photo.src}" alt="${photo.cap}" loading="lazy">
+      <div class="caption">${photo.cap}</div>
+    `;
+    gallery.appendChild(div);
+  });
+
+  /* ===== ПОЯВЛЕНИЕ ПРИ СКРОЛЛЕ ===== */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.letter-block').forEach(el => observer.observe(el));
+  document.querySelectorAll('.polaroid').forEach((el, i) => {
+    el.style.transitionDelay = (i % 3) * 0.1 + 's';
+    observer.observe(el);
+  });
+
+  /* ===== СЧЁТЧИК ===== */
+  const startDate = new Date(2025, 4, 4, 0, 0, 0);
+
+  function updateCounter() {
+    const now = new Date();
+    const diff = now - startDate;
+    const totalSeconds = Math.floor(diff / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    document.getElementById('daysCount').textContent = days;
+    document.getElementById('hoursCount').textContent = hours;
+    document.getElementById('minutesCount').textContent = minutes;
+    document.getElementById('secondsCount').textContent = seconds;
+  }
+  updateCounter();
+  setInterval(updateCounter, 1000);
+
+  /* ===== СЕРДЕЧКИ ПРИ КЛИКЕ ===== */
+  document.addEventListener('click', function(e) {
+    const heart = document.createElement('div');
+    heart.textContent = ['❤️','💕','💖','💗','🌹'][Math.floor(Math.random()*5)];
+    heart.style.position = 'fixed';
+    heart.style.left = e.clientX + 'px';
+    heart.style.top = e.clientY + 'px';
+    heart.style.fontSize = '24px';
+    heart.style.pointerEvents = 'none';
+    heart.style.zIndex = '9999';
+    heart.style.transition = 'all 1s ease-out';
+    document.body.appendChild(heart);
+    setTimeout(() => {
+      heart.style.transform = 'translateY(-100px) scale(1.5)';
+      heart.style.opacity = '0';
+    }, 10);
+    setTimeout(() => heart.remove(), 1000);
+  });
+</script>
+
+</body>
+</html>
